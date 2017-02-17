@@ -1,0 +1,16 @@
+<h1>Picks</h1>
+
+<h2>Wombo Combo</h2>
+
+<div class="featured">
+    <img src="images/heroes/76.jpg"/>
+    <img src="images/heroes/100.jpg"/>
+    <img src="images/heroes/110.jpg"/>
+    <img src="images/heroes/103.jpg"/>
+    <img src="images/heroes/44.jpg"/>  
+</div>
+<h2>Heroes</h2>
+  <span class="hero" *ngFor="let hero of heroInfo">
+      <img src="images/heroes/{{hero._source.id}}.jpg" />
+      <span>{{hero._source.id}}</span>
+    </span>

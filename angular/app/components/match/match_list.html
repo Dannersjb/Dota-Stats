@@ -1,0 +1,35 @@
+<h1>Match List</h1>
+<div class="filters">
+    <label>Game Mode: </label><select (change)="getMatchDataByGameMode($event.target.value)">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="22">22</option>
+    </select>
+    <label>Lobby Type: </label><select (change)="getMatchDataByLobbyMode($event.target.value)">
+        <option value="Public Matchmaking">Public Matchmaking</option>
+        <option value="Public Matchmaking">Ranked Matchmaking</option>
+        <option value="Solo Queue">Solo Queue</option>
+        <option value="Tournament">Tournament</option>
+    </select>
+    <a (click)="getAllMatchData()">Clear Filters</a>
+</div>
+<ul class="match_list">
+    <li class="titles">
+        <span class="match_id">Match Id</span>
+        <span class="result">Result</span>
+        <span class="rad_heroes">Radiant Heroes</span>
+        <span class="dire_heroes">Dire Heroes</span>
+    </li>
+    <li *ngFor="let match of matchData">
+            <a routerLink="/match/{{match.match_id}}">
+                <span class="matchid">{{match.match_id}}</span>
+                <span class="result radiant" *ngIf="match.radiant_win == true"> Radiant Victory </span>
+                <span class="result dire" *ngIf="match.radiant_win == false"> Dire Victory </span>
+                <span class="heroimg" *ngFor="let hero of match.players">
+                    <img src="/images/heroes/{{hero.hero_id}}.jpg" />
+                </span>
+            </a>
+    </li>
+</ul>
