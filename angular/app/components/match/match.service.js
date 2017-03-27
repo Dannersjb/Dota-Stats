@@ -27,6 +27,11 @@ var MatchService = (function () {
             .then(function (r) { return r.json(); })
             .then(function (r) { return _this.matchInfo = r; });
     };
+    MatchService.prototype.getUserMatchData = function (userId) {
+        return this.http.get('http://localhost:8080/api/matches/user/' + userId)
+            .toPromise()
+            .then(function (r) { return JSON.parse(r["_body"]); });
+    };
     MatchService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])

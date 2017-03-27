@@ -1,16 +1,168 @@
-<h1>Picks</h1>
-
-<h2>Wombo Combo</h2>
-
-<div class="featured">
+<div class="title_header">
+    <h1 class="dreamcast">Dreamcast</h1>
+    <a (click)="pickNewTeam()" class="button pick">Pick a Team</a>
+</div>
+<!--<div class="featured">
     <img src="images/heroes/76.jpg"/>
     <img src="images/heroes/100.jpg"/>
     <img src="images/heroes/110.jpg"/>
     <img src="images/heroes/103.jpg"/>
     <img src="images/heroes/44.jpg"/>  
+</div>-->
+
+<div class="new_team">
+    <div class="selector">
+        <form (submit)=submitNewTeam()>
+            <label>Team Name<input type="text" required minlength="1"  [(ngModel)]="model.teamName" name="teamName" #teamName="ngModel"/></label>
+            <div *ngIf="teamName.errors && (teamName.dirty || teamName.touched)" class="error">
+                <span>Please enter a value for the team's name</span>
+            </div>
+            <ul>
+                <li><img class="heroimg1"/></li>
+                <li><img class="heroimg2"/></li>
+                <li><img class="heroimg3"/></li>
+                <li><img class="heroimg4"/></li>
+                <li><img class="heroimg5"/></li>
+            </ul>
+        
+            <select class="slot1" (change)="onSelectChange($event.target.value, '1')" [(ngModel)]="model.slot1" name="slot1" #slot1="ngModel">
+                <option></option>
+                <option *ngFor="let hero of heroInfo" value="{{hero._source.id}}"> 
+                    <!--data-content="images/heroes/{{hero._source.id}}.jpg"-->
+                    {{hero._source.name}}
+                </option>
+            </select>
+            <select class="slot2" (change)="onSelectChange($event.target.value, '2')" [(ngModel)]="model.slot2" name="slot2" #slot2="ngModel"> 
+                <option></option>
+                <option *ngFor="let hero of heroInfo" value="{{hero._source.id}}">
+                    {{hero._source.name}}
+                </option>
+            </select>
+            <select class="slot3" (change)="onSelectChange($event.target.value, '3')" [(ngModel)]="model.slot3" name="slot3" #slot3="ngModel">
+                <option></option>
+                <option *ngFor="let hero of heroInfo" value="{{hero._source.id}}">
+                    {{hero._source.name}}
+                </option>
+            </select>
+            <select class="slot4" (change)="onSelectChange($event.target.value, '4')" [(ngModel)]="model.slot4" name="slot4" #slot4="ngModel">
+                <option></option>
+                <option *ngFor="let hero of heroInfo" value="{{hero._source.id}}">
+                    {{hero._source.name}}
+                </option>
+            </select>
+            <select class="slot5" (change)="onSelectChange($event.target.value, '5')" [(ngModel)]="model.slot5" name="slot5" #slot5="ngModel">
+                <option></option>
+                <option *ngFor="let hero of heroInfo" value="{{hero._source.id}}">
+                    {{hero._source.name}}
+                </option>
+            </select>
+
+            <h2>Overview</h2>
+            <div class="overview">
+                <span>Carry :</span><div class="bar carry"><div class="fill"></div></div>
+                <span>Disable :</span><div class="bar disable"><div class="fill"></div></div>
+                <span>Initiation :</span><div class="bar initiation"><div class="fill"></div></div>
+                <span>Nuke : </span><div class="bar nuke"><div class="fill"></div></div>
+                <span>Push : </span><div class="bar push"><div class="fill"></div></div>
+                <span>Durable :</span><div class="bar durable"><div class="fill"></div></div>
+                <span>Support :</span><div class="bar support"><div class="fill"></div></div>
+                <span>Lane Support :</span><div class="bar laneSupport"><div class="fill"></div></div>
+            </div>
+
+            <a (click)="submitNewTeam()" class="button submit">Submit</a>
+        </form>
+    </div>
 </div>
+<div class="complete"><span>Your team has been submitted!</span></div>
+<h2>Current Team Picks</h2>
+
+<ul class="pick_list">
+<li class="titles">
+    <span class="name">Team Name</span>
+    <span class="author">Author</span>
+    <span class="heroes">Heroes</span>
+</li>
+    <li class="pick" *ngFor="let pick of picksInfo">
+        <div class="mainPick">
+            <span class="name">{{pick._source.teamName}}</span>
+            <span class="author"> by {{pick._source.author}}</span>
+            <span class="heroimg"><img src="images/heroes/{{pick._source.slot1}}.jpg" /></span>
+            <span class="heroimg"><img src="images/heroes/{{pick._source.slot2}}.jpg" /></span>
+            <span class="heroimg"><img src="images/heroes/{{pick._source.slot3}}.jpg" /></span>
+            <span class="heroimg"><img src="images/heroes/{{pick._source.slot4}}.jpg" /></span>
+            <span class="heroimg"><img src="images/heroes/{{pick._source.slot5}}.jpg" /></span>
+            <a class="button showDetails">Details</a>
+        </div>
+        <div class="details overview"> 
+            <span>Carry :</span>
+            <div class="bar carry">
+                <div *ngIf="pick._source.carry < 40 || pick._source.carry > 160" class="fill low" [style.width]="pick._source.carry + '%'"></div>
+                <div *ngIf="pick._source.carry > 40 && pick._source.carry < 70" class="fill medium" [style.width]="pick._source.carry + '%'"></div>
+                <div *ngIf="pick._source.carry > 70 && pick._source.carry < 160" class="fill high" [style.width]="pick._source.carry + '%'"></div>
+            </div>
+            <span>Disable :</span>
+            <div class="bar disable">
+                <div *ngIf="pick._source.disable < 40" class="fill low" [style.width]="pick._source.disable + '%'"></div>
+                <div *ngIf="pick._source.disable > 40 && pick._source.disable < 70" class="fill medium" [style.width]="pick._source.disable + '%'"></div>
+                <div *ngIf="pick._source.disable > 70" class="fill high" [style.width]="pick._source.disable + '%'"></div>
+            </div>
+            <span>Initiation :</span>
+            <div class="bar initiation">
+                <div *ngIf="pick._source.initiation < 40" class="fill low" [style.width]="pick._source.initiation + '%'"></div>
+                <div *ngIf="pick._source.initiation > 40 && pick._source.initiation < 70" class="fill medium" [style.width]="pick._source.initiation + '%'"></div>
+                <div *ngIf="pick._source.initiation > 70" class="fill high" [style.width]="pick._source.initiation + '%'"></div>
+            </div>
+            <span>Nuke : </span>
+            <div class="bar nuke">
+                <div *ngIf="pick._source.nuke < 40" class="fill low" [style.width]="pick._source.nuke + '%'"></div>
+                <div *ngIf="pick._source.nuke > 40 && pick._source.nuke < 70" class="fill medium" [style.width]="pick._source.nuke + '%'"></div>
+                <div *ngIf="pick._source.nuke > 70" class="fill high" [style.width]="pick._source.nuke + '%'"></div>
+            </div>
+            <span>Push : </span>
+            <div class="bar push">
+                <div *ngIf="pick._source.push < 40" class="fill low" [style.width]="pick._source.push + '%'"></div>
+                <div *ngIf="pick._source.push > 40 && pick._source.push < 70" class="fill medium" [style.width]="pick._source.push + '%'"></div>
+                <div *ngIf="pick._source.push > 70" class="fill high" [style.width]="pick._source.push + '%'"></div>
+            </div>
+            <span>Durable :</span>
+            <div class="bar durable">
+                <div *ngIf="pick._source.durable < 40" class="fill low" [style.width]="pick._source.durable + '%'"></div>
+                <div *ngIf="pick._source.durable > 40 && pick._source.durable < 60" class="fill medium" [style.width]="pick._source.durable + '%'"></div>
+                <div *ngIf="pick._source.durable > 70" class="fill high" [style.width]="pick._source.durable + '%'"></div>
+            </div>
+            <span>Support :</span>
+            <div class="bar support">
+                <div *ngIf="pick._source.support < 40 || pick._source.support > 170" class="fill low" [style.width]="pick._source.support + '%'"></div>
+                <div *ngIf="pick._source.support > 40 && pick._source.support < 70" class="fill medium" [style.width]="pick._source.support + '%'"></div>
+                <div *ngIf="pick._source.support > 70 && pick._source.support < 170" class="fill high" [style.width]="pick._source.support + '%'"></div>
+            </div>
+            <span>Lane Support :</span>
+            <div class="bar laneSupport">
+                <div *ngIf="pick._source.laneSupport < 40" class="fill low" [style.width]="pick._source.laneSupport + '%'"></div>
+                <div *ngIf="pick._source.laneSupport > 40 && pick._source.laneSupport < 70" class="fill medium" [style.width]="pick._source.laneSupport + '%'"></div>
+                <div *ngIf="pick._source.laneSupport > 70" class="fill high" [style.width]="pick._source.laneSupport + '%'"></div>
+            </div>
+        </div>
+    </li>
+</ul>
+
 <h2>Heroes</h2>
+<div class="hero_list">
   <span class="hero" *ngFor="let hero of heroInfo">
       <img src="images/heroes/{{hero._source.id}}.jpg" />
-      <span>{{hero._source.id}}</span>
+      <div class="hero_info">
+        <span class="name">{{hero._source.name}}</span>
+        <span *ngIf="hero._source.push!=null">Push: {{hero._source.push}}</span>
+        <span *ngIf="hero._source.durable!=null">Durable: {{hero._source.durable}}</span>
+        <span *ngIf="hero._source.nuke!=null">Nuke: {{hero._source.nuke}}</span>
+        <span *ngIf="hero._source.support!=null">Support: {{hero._source.support}}</span>
+        <span *ngIf="hero._source.laneSupport!=null">Lane Support: {{hero._source.laneSupport}}</span>
+        <span *ngIf="hero._source.escape!=null">Escape: {{hero._source.escape}}</span>
+        <span *ngIf="hero._source.carry!=null">Carry: {{hero._source.carry}}</span>
+        <span *ngIf="hero._source.teamFight!=null">Team Fight: {{hero._source.teamFight}}</span>
+        <span *ngIf="hero._source.jungle!=null">Jungle: {{hero._source.jungle}}</span>
+        <span *ngIf="hero._source.initiation!=null">Initiation: {{hero._source.initiation}}</span>
+        <span *ngIf="hero._source.disable!=null">Disable: {{hero._source.disable}}</span>
+      </div>
     </span>
+</div>

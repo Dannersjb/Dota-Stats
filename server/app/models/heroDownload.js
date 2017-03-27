@@ -21,9 +21,9 @@ var self = module.exports = {
                 var heroArray = heroData['result']['heroes'];
                 var newHeroData = changeData(heroArray);
                 console.log(newHeroData);
-                // for (var i = 0; i < newHeroData.length; i++) {
-                //         updateDb(newHeroData[i]);
-                // }
+                 for (var i = 0; i < newHeroData.length; i++) {
+                    updateDb(newHeroData[i]);
+                 }
             });
         }).on('error', function (e) {
             console.log("dota link did not work : ", e);
@@ -46,8 +46,9 @@ var updateDb = function(heroData) {
     client.index({  
         index: 'hero',
         type: 'game',
+        id : heroData['id'].toString(),
         body: heroData
     },function(err,resp,status) {
-        console.log(resp);
+        console.log(err, resp);
     });
 }

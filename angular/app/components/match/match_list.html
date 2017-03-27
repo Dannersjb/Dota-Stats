@@ -1,15 +1,13 @@
 <h1>Match List</h1>
 <div class="filters">
     <label>Game Mode: </label><select (change)="getMatchDataByGameMode($event.target.value)">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="22">22</option>
+        <option value="All Pick">All Pick</option>
+        <option value="Captains Mode">Captains Mode</option>
+        <option value="Random Draft">Random Draft</option>
     </select>
     <label>Lobby Type: </label><select (change)="getMatchDataByLobbyMode($event.target.value)">
-        <option value="Public Matchmaking">Public Matchmaking</option>
-        <option value="Public Matchmaking">Ranked Matchmaking</option>
+        <option value="Public">Public Matchmaking</option>
+        <option value="Ranked">Ranked Matchmaking</option>
         <option value="Solo Queue">Solo Queue</option>
         <option value="Tournament">Tournament</option>
     </select>
@@ -22,11 +20,12 @@
         <span class="rad_heroes">Radiant Heroes</span>
         <span class="dire_heroes">Dire Heroes</span>
     </li>
+    <li class="no_matches" *ngIf="matchData?.length==0"><p>No Matches Found</p></li>
     <li *ngFor="let match of matchData">
             <a routerLink="/match/{{match.match_id}}">
-                <span class="matchid">{{match.match_id}}</span>
-                <span class="result radiant" *ngIf="match.radiant_win == true"> Radiant Victory </span>
-                <span class="result dire" *ngIf="match.radiant_win == false"> Dire Victory </span>
+                <span class="matchid"><span>{{match.match_id}}</span><span>{{match.game_mode}}</span><span>{{match.lobby_type}}</span></span>
+                <span class="result" *ngIf="match.radiant_win == true"> <span class="radiant">Radiant Victory</span><span>{{match.start_time}}</span> </span>
+                <span class="result" *ngIf="match.radiant_win == false"> <span class="dire">Dire Victory </span><span>{{match.start_time}}</span></span>
                 <span class="heroimg" *ngFor="let hero of match.players">
                     <img src="/images/heroes/{{hero.hero_id}}.jpg" />
                 </span>

@@ -40,7 +40,7 @@ var HeroComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: 'hero',
-            template: "\n  <h1>Heroes</h1>\n    <span class=\"hero\" *ngFor=\"let hero of heroInfo\">\n      <img src=\"images/heroes/{{hero._source.id}}.jpg\" />\n      <span>{{hero._source.name}}</span>\n    </span>\n  ",
+            template: "\n  <h1>Heroes</h1>\n    <span class=\"hero\" *ngFor=\"let hero of heroInfo\">\n      <img src=\"images/heroes/{{hero._source.id}}.jpg\" />\n      <span class=\"name\">{{hero._source.name}}</span>\n      <div class=\"hero_info\">\n        <span *ngIf=\"hero._source.push!=null\">Push: {{hero._source.push}}</span>\n        <span *ngIf=\"hero._source.durable!=null\">Durable: {{hero._source.durable}}</span>\n        <span *ngIf=\"hero._source.nuke!=null\">Nuke: {{hero._source.nuke}}</span>\n        <span *ngIf=\"hero._source.support!=null\">Support: {{hero._source.support}}</span>\n        <span *ngIf=\"hero._source.laneSupport!=null\">Lane Support: {{hero._source.laneSupport}}</span>\n        <span *ngIf=\"hero._source.escape!=null\">Escape: {{hero._source.escape}}</span>\n        <span *ngIf=\"hero._source.carry!=null\">Carry: {{hero._source.carry}}</span>\n        <span *ngIf=\"hero._source.teamFight!=null\">Team Fight: {{hero._source.teamFight}}</span>\n        <span *ngIf=\"hero._source.jungle!=null\">Jungle: {{hero._source.jungle}}</span>\n        <span *ngIf=\"hero._source.initiation!=null\">Initiation: {{hero._source.initiation}}</span>\n        <span *ngIf=\"hero._source.disable!=null\">Disable: {{hero._source.disable}}</span>\n      </div>\n    </span>\n  ",
             styleUrls: ['hero.css'],
             providers: [hero_service_1.HeroService]
         }), 

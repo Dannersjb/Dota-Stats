@@ -1,0 +1,295 @@
+.profile_pic {
+    border-radius: 100%;
+    overflow: hidden;
+    width: 184px;
+    height: 184px;
+    float: left;
+}
+
+.profile_info {
+    float: left;
+    padding-left: 30px;
+}
+
+.profile_info span {
+    float: left;
+    clear: both;  
+}
+
+.page_block h3 {
+    margin-top: 0;
+}
+
+.profile_info h3 a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.profile_info h3 a:hover {
+    color: #fd7272;
+}
+
+ul#match_list {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    overflow: hidden;
+    background-color: #2f2d2d;
+}
+
+ul#match_list li {
+    transition: background-color 0.5s ease;
+    overflow: hidden;
+}
+
+ul#match_list li:hover {
+    background-color: #6d6d6d;
+}
+
+ul#match_list li.titles {
+    background-color: grey;
+    padding: 10px 15px;
+}
+
+ul#match_list li span {
+    width: 17%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+ul#match_list li span.heroimg {
+    width: 53px;    
+    height: 30px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+ul#match_list li span span {
+    float: left;
+    clear: both;
+    width: 100%
+}
+
+ul#match_list li span:nth-child(9) {
+    margin-left: 4%;
+}
+
+ul#match_list li span.result {   
+    width: 13%;
+}
+
+ul#match_list li span.match_id {
+    width: 14%;
+}
+
+ul#match_list li span.profile_pick {
+    width: 8%;
+}
+
+ul#match_list li span.profile_pick img {
+    height: 34px;
+}
+
+ul#match_list li span.rad_heroes {
+    width: 33%;
+}
+
+ul#match_list li span img {
+    height: 30px;
+    width: auto;
+}
+
+ul#match_list li a {   
+    width: 100%; 
+    padding: 15px;
+    color: #ffffff;
+    text-decoration: none;
+    float: left;
+    display: block;
+    box-sizing: border-box;
+}
+
+.complete {
+    display: none;
+    background-color: #5cb77f;
+    text-align: center;
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 5px; 
+}
+
+.download {
+    margin-top: 25px;
+    display: block;
+    width: 160px
+}
+
+.games_summary {
+    float: left;
+    display: block;
+    padding-left: 45px;
+}
+
+.last_games_circle {
+    background-color: #3dbf33;
+    border-radius: 100%;
+    height: 90px;
+    width: 90px;
+    font-size: 26px;
+    position: relative;
+    border: 3px solid #ffffff;
+}
+
+
+.last_games_circle:before {
+    content: '';
+    border-bottom: 3px solid #ffffff;
+    position: absolute;
+    top: 45px;
+    left: 0px;
+    display: block;
+    height: 0px;
+    width: 90px;
+}
+
+.last_games_circle .wins {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    text-align: center;
+    width: 100%;
+    margin-left: -15px;
+}
+
+.last_games_circle .total {
+    position: absolute;
+    top: 52px;
+    left: 15px;
+    text-align: center;
+    width: 100%;
+    margin-left: -15px;
+}
+
+ul#pick_list {
+    display: none;
+    list-style: none;
+    padding: 0;
+    width: 100%;  
+    overflow: hidden;
+    background-color: #2f2d2d;
+}
+
+ul#pick_list li {
+    overflow: hidden;
+    transition: background-color 0.5s ease;
+}
+
+ul#pick_list li:hover {
+    background-color: #6d6d6d;
+}
+
+ul#pick_list li.titles {
+    background-color: grey;
+    padding: 10px 15px;
+}
+
+ul#pick_list li span {
+    width: 20%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+ul#pick_list li span.name {
+    text-transform: capitalize;
+}
+
+ul#pick_list li span.heroimg {
+    width: 68px;  
+    height: 40px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+ul#pick_list li span img {
+    height: 40px;
+    width: auto;
+}
+
+ul#pick_list li {   
+    width: 100%; 
+    padding: 15px;
+    color: #ffffff;
+    text-decoration: none;
+    float: left;
+    display: block;
+    box-sizing: border-box;
+}
+
+ul.profile_menu {
+    list-style: none;
+    width: 100%;
+    height: 60px;
+    float: left;
+    display: table;
+    padding: 0;
+    margin: 20px 0 0;
+}
+
+ul.profile_menu li {
+    display: table-cell;
+    color: #ffffff;
+    list-style: none;
+    width: 15%;
+}
+
+ul.profile_menu li a {
+    color: #ffffff;
+    padding: 20px 0;
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    transition: background-color 0.5s ease;
+    background-color: #000000;    
+    height: 60px;
+    box-sizing: border-box;
+}
+
+ul.profile_menu li a:hover {
+  background-color: #933523;
+}
+
+ul.profile_menu li a.open {
+   background-color: #ffffff;
+   color: #000000;
+}
+
+.delete.button {
+    height: 40px;
+    display: inline-block;
+    vertical-align: middle;
+    box-sizing: border-box;
+    margin-left: 30px;
+}
+
+.deleted {
+    display: none;
+    background-color: #fd7272;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px; 
+    margin-top: 15px;
+}
+
+.failed {
+    display: none;
+    background-color: #fd7272;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px; 
+    margin-top: 15px;
+}
+
+ul#match_list li.no_matches {
+    text-align: center;
+    padding: 20px;
+}

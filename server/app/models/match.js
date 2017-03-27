@@ -32,9 +32,44 @@ module.exports = {
         client.search({
             index: 'match',
             type: 'game',
+            size : 100,
             body: {
                 query: {
                     match_all: {}
+                },
+                sort :  {
+                  "start_time" : { 
+                      order : "desc" 
+                  } 
+                }
+            }
+        }, function (error, response, status) {
+            if (error) {
+                console.log("match search error: " + error)
+            } else {
+                var matches = [];
+                response.hits.hits.forEach(function(hit) {
+                    matches.push(hit);
+                })
+                callback(matches)
+            }
+        });
+    },
+    getAllUserMatchData : function(userId, callback) {
+        client.search({
+            index: 'match',
+            type: 'game',
+            size : 100,
+            body: {
+                query: {
+                   match: {
+                        "players.account_id": parseInt(userId)
+                    }
+                },
+                sort :  {
+                  "start_time" : { 
+                      order : "desc" 
+                  } 
                 }
             }
         }, function (error, response, status) {
@@ -53,16 +88,18 @@ module.exports = {
         client.search({
             index: 'match',
             type: 'game',
+            size : 100,
             body: {
                 query: {
-                    constant_score: {
-                        filter: {
-                            term: {
-                                "game_mode": parseInt(gameMode)
-                            }
-                        }
+                    match: {
+                        "game_mode": gameMode
                     }
-                },
+                }, 
+                sort :  {
+                  "start_time" : { 
+                      order : "desc" 
+                  } 
+                }
             }
         }, function (error, response, status) {
             if (error) {
@@ -76,20 +113,22 @@ module.exports = {
         client.search({
             index: 'match',
             type: 'game',
+            size : 100,
             body: {
                 query: {
-                    constant_score: {
-                        filter: {
-                            term: {
-                                "lobby_type": parseInt(lobbyType)
-                            }
-                        }
+                    match: {
+                        "lobby_type": lobbyType
                     }
                 },
+                sort :  {
+                  "start_time" : { 
+                      order : "desc" 
+                  } 
+                }
             }
         }, function (error, response, status) {
             if (error) {
-                console.log("match search error: " + error)
+                console.log("match search error: " + error + response)
             } else {
                 callback(response.hits.hits);
             }

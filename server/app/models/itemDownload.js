@@ -20,7 +20,6 @@ var self = module.exports = {
                 console.log("dota link worked!");
                 var itemArray = itemData['result']['items'];
                 var newitemData = changeData(itemArray);
-                console.log(newitemData);
                 bulkIndex('item', 'game', newitemData);   
             });
         }).on('error', function (e) {
@@ -39,13 +38,13 @@ var changeData = function(itemData) {
 
 var bulkIndex = function(index, type, data) {
   let bulkBody = [];
-
-  data.forEach(item => {
+  data.forEach(item => {     
     bulkBody.push({
       index: {
         _index: index,
-        _type: type
-      }
+        _type: type,
+        _id : item['id'].toString()
+      },
     });
 
     bulkBody.push(item);

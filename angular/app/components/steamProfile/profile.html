@@ -1,0 +1,84 @@
+<div *ngIf="loggedIn==false">
+    <h1>Login</h1>
+    <a href="http://localhost:8080/api/authenticate"><img src="https://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_02.png"/></a>
+</div> 
+
+<div *ngIf="loggedIn==true">
+  <h1>Profile</h1>
+      <div class="page_block">
+            <div class="profile_pic"><img src="{{profileImages.large}}" /></div>
+            <div class="profile_info">
+              <h3><a href="{{profileInfo.profile}}" target="_blank">{{profileInfo.username}}</a></h3>
+              <p>{{profileInfo.name}}</p> 
+              <p>64-bit Steam Id : {{profileInfo.steamid}}</p>
+              <p>32-bit Steam Id : {{profileInfo.steamid32}}</p>
+              <a class="button download" (click)="downloadLatestGames(profileInfo.steamid32)">Download Matches</a>
+            </div>
+            <div class="games_summary">
+                <h3>Latest Summary</h3>
+                <div class="last_games_circle">
+                    <span class="wins">{{total_wins}}</span> 
+                    <span class="total">{{total_games}}</span>
+                </div>
+                <p>Win Rate : {{win_percent}}%</p>
+                <p>Picks Created : {{total_picks}}</p>
+            </div>
+      </div>
+      <div class="complete"><span>Your games have been downloaded!</span></div>
+      <div class="deleted"><span>Your team has been deleted</span></div>
+      <div class="failed"><span>Failed to download your matches</span></div>
+
+<div id="tabs">
+    <ul class="profile_menu">
+        <li><a href="#match_list" class="open">Latest Games ({{total_games}})</a></li>
+        <li><a href="#pick_list">Picks ({{total_picks}})</a></li>
+    </ul>
+    <ul *ngIf="matchData!=null" class="open" id="match_list">
+        <li class="titles">
+            <span class="profile_pick">Hero</span>
+            <span class="match_id">Match Id</span>
+            <span class="result">Result</span>
+            <span class="rad_heroes">Radiant Heroes</span>
+            <span class="dire_heroes">Dire Heroes</span>
+        </li> 
+        <li class="no_matches" *ngIf="matchData?.length==0"><p>No Matches Found</p></li>
+        <li *ngFor="let match of matchData">
+                <a routerLink="/match/{{match.match_id}}">
+                    <span class="profile_pick">
+                        <img  src="/images/heroes/{{match.profile_hero}}.jpg" />
+                    </span>
+                    <span class="match_id">
+                        <span>{{match.match_id}}</span>
+                        <span>{{match.game_mode}}</span>
+                    </span>
+                    <span class="result"> 
+                        <span class="radiant" *ngIf="match.win==true">Won Match</span>
+                        <span class="dire" *ngIf="match.win==false">Lost Match</span>
+                        <span>{{match.start_time}}</span> 
+                </span>
+                    <span class="heroimg" *ngFor="let hero of match.players">
+                        <img src="/images/heroes/{{hero.hero_id}}.jpg" />
+                    </span>
+                </a>
+        </li>
+    </ul>
+    <ul *ngIf="picksInfo!=null" id="pick_list">
+        <li class="titles">
+            <span class="name">Team Name</span>
+            <span class="author">Author</span>
+            <span class="heroes">Heroes</span>
+        </li>
+        <li class="pick" *ngFor="let pick of picksInfo">
+            <span class="name">{{pick._source.teamName}}</span>
+            <span class="author"> by {{pick._source.author}}</span>
+            <span class="heroimg"><img src="images/heroes/{{pick._source.slot1}}.jpg" /></span>
+            <span class="heroimg"><img src="images/heroes/{{pick._source.slot2}}.jpg" /></span>
+            <span class="heroimg"><img src="images/heroes/{{pick._source.slot3}}.jpg" /></span>
+            <span class="heroimg"><img src="images/heroes/{{pick._source.slot4}}.jpg" /></span>
+            <span class="heroimg"><img src="images/heroes/{{pick._source.slot5}}.jpg" /></span>
+            <a class="delete button" (click)="deletePick(pick._id)">Delete</a>
+        </li>
+    </ul>
+</div>
+
+</div>

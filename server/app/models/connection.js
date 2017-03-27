@@ -1,4 +1,5 @@
 var elasticsearch = require('elasticsearch');
+var elasticDeleteQuery  = require('elastic-deletebyquery');
 
 var client = new elasticsearch.Client({  
   hosts: [
@@ -6,5 +7,7 @@ var client = new elasticsearch.Client({
     'http://localhost:9200/'
   ]
 });
+
+elasticDeleteQuery(client);
 
 module.exports = client;  

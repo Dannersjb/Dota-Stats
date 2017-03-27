@@ -31,6 +31,26 @@ module.exports = {
                 callback(matches)
             }
         });
+    },
+    getHeroById : function(heroId, callback) {
+         client.search({
+            index: 'hero',
+            type: 'game',
+            size : 1,
+            body: {
+                query: {
+                    match: {
+                        "id": parseInt(heroId)
+                    }
+                }
+            }
+        }, function (error, response, status) {
+            if (error) {
+                console.log("match search error: " + error + response)
+            } else {
+                callback(response.hits.hits);
+            }
+        });
     }
 }
 

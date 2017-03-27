@@ -18,7 +18,7 @@ const appRoutes: Routes = [
         component: MatchComponent
     },
     {
-        path: '',
+        path: 'home',
         component: HeroComponent
     }, 
     {

@@ -20,4 +20,11 @@ export class MatchService {
             .then(r => r.json())
             .then(r => this.matchInfo = r)
     }
+
+    getUserMatchData(userId : string) {
+         return this.http.get('http://localhost:8080/api/matches/user/' + userId)
+            .toPromise()
+            .then(r => { return JSON.parse(r["_body"]) })  
+    }
+
 }

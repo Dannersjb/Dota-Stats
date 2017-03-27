@@ -13,11 +13,9 @@ var http_1 = require('@angular/http');
 var router_1 = require('@angular/router');
 require('rxjs/add/operator/toPromise');
 var match_service_1 = require('./match.service');
-var SteamProfile_service_1 = require('../../services/SteamProfile.service');
 var MatchComponent = (function () {
-    function MatchComponent(matchService, steamProfileService, http, route) {
+    function MatchComponent(matchService, http, route) {
         this.matchService = matchService;
-        this.steamProfileService = steamProfileService;
         this.http = http;
         this.route = route;
         this.profileId = "76561197998443920";
@@ -51,9 +49,115 @@ var MatchComponent = (function () {
                 .then(function (r) { return _this.lobbyType = _this.matchInfo['lobby_type']; })
                 .then(function (r) { return _this.matchDuration = _this.matchInfo['duration']; })
                 .then(function (r) { return _this.setTowerColours(_this.matchInfo['tower_status_dire']); })
-                .then(function (r) { return _this.radiantPlayers = _this.matchInfo['players'].slice(0, 5); })
-                .then(function (r) { return _this.direPlayers = _this.matchInfo['players'].slice(5, 10); });
+                .then(function (r) {
+                console.log(_this.matchInfo['players']);
+                _this.getNetworth(_this.matchInfo['players']);
+            });
+            setTimeout(function () {
+                _this.compressResults();
+            }, 1000);
         });
+    };
+    MatchComponent.prototype.getNetworth = function (players) {
+        var _loop_1 = function(player) {
+            player['net_worth'] = player['gold'];
+            this_1.http.get('http://localhost:8080/api/item/id/' + player['item_0']).toPromise().then(function (r) {
+                var slot = JSON.parse(r["_body"]);
+                if (slot.hasOwnProperty(0)) {
+                    player['net_worth'] += slot[0]['_source']['cost'];
+                }
+            });
+            this_1.http.get('http://localhost:8080/api/item/id/' + player['item_1']).toPromise().then(function (r) {
+                var slot = JSON.parse(r["_body"]);
+                if (slot.hasOwnProperty(0)) {
+                    player['net_worth'] += slot[0]['_source']['cost'];
+                }
+            });
+            this_1.http.get('http://localhost:8080/api/item/id/' + player['item_2']).toPromise().then(function (r) {
+                var slot = JSON.parse(r["_body"]);
+                if (slot.hasOwnProperty(0)) {
+                    player['net_worth'] += slot[0]['_source']['cost'];
+                }
+            });
+            this_1.http.get('http://localhost:8080/api/item/id/' + player['item_3']).toPromise().then(function (r) {
+                var slot = JSON.parse(r["_body"]);
+                if (slot.hasOwnProperty(0)) {
+                    player['net_worth'] += slot[0]['_source']['cost'];
+                }
+            });
+            this_1.http.get('http://localhost:8080/api/item/id/' + player['item_4']).toPromise().then(function (r) {
+                var slot = JSON.parse(r["_body"]);
+                if (slot.hasOwnProperty(0)) {
+                    player['net_worth'] += slot[0]['_source']['cost'];
+                }
+            });
+            this_1.http.get('http://localhost:8080/api/item/id/' + player['item_5']).toPromise().then(function (r) {
+                var slot = JSON.parse(r["_body"]);
+                if (slot.hasOwnProperty(0)) {
+                    player['net_worth'] += slot[0]['_source']['cost'];
+                }
+            });
+            this_1.http.get('http://localhost:8080/api/item/id/' + player['backpack_0']).toPromise().then(function (r) {
+                var slot = JSON.parse(r["_body"]);
+                if (slot.hasOwnProperty(0)) {
+                    player['net_worth'] += slot[0]['_source']['cost'];
+                }
+            });
+            this_1.http.get('http://localhost:8080/api/item/id/' + player['backpack_1']).toPromise().then(function (r) {
+                var slot = JSON.parse(r["_body"]);
+                if (slot.hasOwnProperty(0)) {
+                    player['net_worth'] += slot[0]['_source']['cost'];
+                }
+            });
+            this_1.http.get('http://localhost:8080/api/item/id/' + player['backpack_2']).toPromise().then(function (r) {
+                var slot = JSON.parse(r["_body"]);
+                if (slot.hasOwnProperty(0)) {
+                    player['net_worth'] += slot[0]['_source']['cost'];
+                }
+            });
+        };
+        var this_1 = this;
+        for (var _i = 0, players_1 = players; _i < players_1.length; _i++) {
+            var player = players_1[_i];
+            _loop_1(player);
+        }
+    };
+    MatchComponent.prototype.compressResults = function () {
+        var _loop_2 = function(player) {
+            if (player['net_worth'] > 999) {
+                console.log(player['net_worth']);
+                player['net_worth'] = Math.round(player['net_worth'] / 100) / 10;
+                player['net_worth'] = player['net_worth'] + "K";
+            }
+            if (player['hero_damage'] > 999) {
+                player['hero_damage'] = Math.round(player['hero_damage'] / 100) / 10;
+                player['hero_damage'] = player['hero_damage'] + "K";
+            }
+            if (player['tower_damage'] > 999) {
+                player['tower_damage'] = Math.round(player['tower_damage'] / 100) / 10;
+                player['tower_damage'] = player['tower_damage'] + "K";
+            }
+            if (player['hero_healing'] > 999) {
+                player['hero_healing'] = Math.round(player['hero_healing'] / 100) / 10;
+                player['hero_healing'] = player['hero_healing'] + "K";
+            }
+            this_2.http.get('http://localhost:8080/api/user/' + player['account_id']).toPromise().then(function (r) {
+                var userDetails = JSON.parse(r['_body']);
+                if (userDetails.hasOwnProperty(0)) {
+                    userDetails = userDetails[0]['_source'];
+                    player['username'] = userDetails['personaname'];
+                    player['avatarmedium'] = userDetails['avatarmedium'];
+                    player['profileurl'] = userDetails['profileurl'];
+                }
+            });
+        };
+        var this_2 = this;
+        for (var _i = 0, _a = this.matchInfo['players']; _i < _a.length; _i++) {
+            var player = _a[_i];
+            _loop_2(player);
+        }
+        this.radiantPlayers = this.matchInfo['players'].slice(0, 5);
+        this.direPlayers = this.matchInfo['players'].slice(5, 10);
     };
     MatchComponent.prototype.ngOnDestroy = function () {
         this.sub.unsubscribe();
@@ -69,9 +173,9 @@ var MatchComponent = (function () {
             selector: 'match',
             templateUrl: 'match.html',
             styleUrls: ['match.css'],
-            providers: [match_service_1.MatchService, SteamProfile_service_1.SteamProfileService]
+            providers: [match_service_1.MatchService]
         }), 
-        __metadata('design:paramtypes', [match_service_1.MatchService, SteamProfile_service_1.SteamProfileService, http_1.Http, router_1.ActivatedRoute])
+        __metadata('design:paramtypes', [match_service_1.MatchService, http_1.Http, router_1.ActivatedRoute])
     ], MatchComponent);
     return MatchComponent;
 }());

@@ -1,0 +1,266 @@
+.dreamcast {
+    font-family: 'Monoton', cursive;
+    font-size: 38px;
+    font-weight: 300;
+    color: #ffffff;
+    margin: 0;
+}
+
+.new_team {
+    display: none;
+}
+
+ul {
+    margin: 0;
+    padding: 15px 0;
+    overflow: hidden;
+}
+
+h1 {
+    float: left;
+}
+
+.button.pick {
+    float: right;
+    margin: 6px 0;
+}
+
+.new_team li {
+    list-style: none;
+    float: left;
+    margin-right: 15px;
+    width: 124px;
+    height: 72px;
+    border-radius: 59%;
+    border: 3px solid #000;
+    overflow: hidden;
+}
+
+.new_team li:last-child {
+    margin: 0;
+}
+
+.selector {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    overflow: hidden;
+    margin: 30px 0 20px;
+    border-radius: 10px; 
+}
+
+.selector input {
+    margin-left: 10px;
+}
+
+
+.selector label {
+    margin: 10px auto 15px;
+    width: 290px;
+    display: block;
+}
+
+.selector .button {
+    margin-top: 30px;
+    clear: both;
+    float: right;
+}
+
+select:first-of-type {
+    clear:both;
+}
+
+select {
+    float: left;
+    margin-right: 15px;
+}
+
+select:last-of-type {
+    float: left;
+    margin-right: 0;
+}
+
+h2 {
+    clear: both;
+}
+
+.hero_list img {
+    height: 40px;
+    width: auto;
+}
+
+ul.pick_list {
+    list-style: none;
+    padding: 0;
+    width: 100%; 
+    overflow: hidden;
+}
+
+ul.pick_list li {
+    overflow: hidden;
+}
+
+ul.pick_list li .mainPick { 
+    background-color: #2f2d2d;   
+    padding: 20px;
+}
+
+ul.pick_list li.titles {
+    background-color: grey;
+    padding: 10px 15px;
+}
+
+ul.pick_list li span {
+    width: 20%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+ul.pick_list li span.name {
+    text-transform: capitalize;
+}
+
+ul.pick_list li span.heroimg {
+    width: 68px;   
+    height: 40px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+ul.pick_list li span img {
+    height: 40px;
+    width: auto;
+}
+
+ul.pick_list li a.showDetails {
+    margin-left: 40px;
+}
+
+ul.pick_list li {   
+    width: 100%; 
+    color: #ffffff;
+    text-decoration: none;
+    float: left;
+    display: block;
+    box-sizing: border-box;
+}
+
+.details {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+}
+
+.complete {
+    display: none;
+    background-color: #5cb77f;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px; 
+}
+
+.overview {
+    overflow: hidden;
+}
+
+.overview span {
+    width: 130px;
+    clear: both;
+    float: left;
+    margin: 5px 0;
+}
+
+.overview > div {
+    float: left;
+    margin: 5px 0;
+}
+
+.bar {
+    border: 1px solid grey;
+    width: 400px;
+    height: 20px;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.bar .fill {
+    height: 100%;
+    width: 0;
+}
+
+.bar .fill.low {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#c9352d+0,dc565b+50,dc4244+51,ea989c+100 */
+background: rgb(201,53,45); /* Old browsers */
+background: -moz-linear-gradient(top, rgba(201,53,45,1) 0%, rgba(220,86,91,1) 50%, rgba(220,66,68,1) 51%, rgba(234,152,156,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, rgba(201,53,45,1) 0%,rgba(220,86,91,1) 50%,rgba(220,66,68,1) 51%,rgba(234,152,156,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, rgba(201,53,45,1) 0%,rgba(220,86,91,1) 50%,rgba(220,66,68,1) 51%,rgba(234,152,156,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c9352d', endColorstr='#ea989c',GradientType=0 ); /* IE6-9 */
+}
+
+.bar .fill.medium {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#c9af2d+0,dcba56+50,dcb842+51,ead498+100 */
+background: rgb(201,175,45); /* Old browsers */
+background: -moz-linear-gradient(top, rgba(201,175,45,1) 0%, rgba(220,186,86,1) 50%, rgba(220,184,66,1) 51%, rgba(234,212,152,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, rgba(201,175,45,1) 0%,rgba(220,186,86,1) 50%,rgba(220,184,66,1) 51%,rgba(234,212,152,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, rgba(201,175,45,1) 0%,rgba(220,186,86,1) 50%,rgba(220,184,66,1) 51%,rgba(234,212,152,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c9af2d', endColorstr='#ead498',GradientType=0 ); /* IE6-9 */
+}
+
+.bar .fill.high {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#23af6e+0,3bdb83+50,24dc7a+51,88eab2+100 */
+    background: rgb(35,175,110); /* Old browsers */
+background: -webkit-linear-gradient(rgba(35,175,110,1) 0%, rgba(59,219,131,1) 50%, rgba(36,220,122,1) 51%, rgba(136,234,178,1) 100%);
+background: -moz-linear-gradient(rgba(35,175,110,1) 0%, rgba(59,219,131,1) 50%, rgba(36,220,122,1) 51%, rgba(136,234,178,1) 100%);
+background: -o-linear-gradient(rgba(35,175,110,1) 0%, rgba(59,219,131,1) 50%, rgba(36,220,122,1) 51%, rgba(136,234,178,1) 100%);
+background: linear-gradient(rgba(35,175,110,1) 0%, rgba(59,219,131,1) 50%, rgba(36,220,122,1) 51%, rgba(136,234,178,1) 100%); /* FF3.6-15 */
+ /* Chrome10-25,Safari5.1-6 */
+ /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#23af6e', endColorstr='#88eab2',GradientType=0 ); /* IE6-9 */
+}
+
+
+.hero {
+    position: relative;
+}
+
+.hero:hover .hero_info {
+    visibility: visible;
+    opacity: 1;
+}
+
+.hero_info {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s linear;
+    z-index: 99;
+    position: absolute;
+    background: #000;
+    width: 100px;
+    min-height: 30px;
+    padding: 10px;
+    height: auto;
+    left: 100%;
+    top: -28px;
+}
+
+.hero_info:before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 16px 10px 0;
+    border-color: transparent #000000 transparent transparent;
+    position: absolute;
+    left: -16px;
+    top: 10px;
+}
+
+.hero_info span {
+    display: block;
+    clear: both;
+}
+
+.hero_info span.name {
+    margin-bottom: 5px;
+    text-transform: capitalize;
+    color: #fff132;
+}

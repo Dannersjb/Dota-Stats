@@ -1,0 +1,16 @@
+language: go
+
+go:
+  - 1.6
+
+install:
+  - mkdir $GOPATH/bin
+  - curl -s -L https://github.com/Masterminds/glide/releases/download/0.9.3/glide-0.9.3-linux-amd64.tar.gz | tar zxv -C $GOPATH/bin --strip-components=1
+  - glide install
+
+script:
+  - make test
+
+cache:
+  directories:
+    - $HOME/gopath/src/github.com/dotabuff/manta/replays

@@ -16,7 +16,7 @@ var appRoutes = [
         component: match_component_1.MatchComponent
     },
     {
-        path: '',
+        path: 'home',
         component: hero_component_1.HeroComponent
     },
     {

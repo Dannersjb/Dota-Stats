@@ -12,7 +12,20 @@ import { HeroService } from './hero.service';
   <h1>Heroes</h1>
     <span class="hero" *ngFor="let hero of heroInfo">
       <img src="images/heroes/{{hero._source.id}}.jpg" />
-      <span>{{hero._source.name}}</span>
+      <span class="name">{{hero._source.name}}</span>
+      <div class="hero_info">
+        <span *ngIf="hero._source.push!=null">Push: {{hero._source.push}}</span>
+        <span *ngIf="hero._source.durable!=null">Durable: {{hero._source.durable}}</span>
+        <span *ngIf="hero._source.nuke!=null">Nuke: {{hero._source.nuke}}</span>
+        <span *ngIf="hero._source.support!=null">Support: {{hero._source.support}}</span>
+        <span *ngIf="hero._source.laneSupport!=null">Lane Support: {{hero._source.laneSupport}}</span>
+        <span *ngIf="hero._source.escape!=null">Escape: {{hero._source.escape}}</span>
+        <span *ngIf="hero._source.carry!=null">Carry: {{hero._source.carry}}</span>
+        <span *ngIf="hero._source.teamFight!=null">Team Fight: {{hero._source.teamFight}}</span>
+        <span *ngIf="hero._source.jungle!=null">Jungle: {{hero._source.jungle}}</span>
+        <span *ngIf="hero._source.initiation!=null">Initiation: {{hero._source.initiation}}</span>
+        <span *ngIf="hero._source.disable!=null">Disable: {{hero._source.disable}}</span>
+      </div>
     </span>
   `,
   styleUrls: ['hero.css'],

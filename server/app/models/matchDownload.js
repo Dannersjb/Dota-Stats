@@ -1,18 +1,18 @@
 "use strict"
 var http = require("http");
-//var mongodb = require("mongodb");
 var client = require('./connection.js');  
 var assert = require('assert');
+var steamUsers = require('./steamProfile');
 
 var key = "&key=BC047CF7E5D0CF76E35D7F63E6E07392";
 //var matchId = "2938613600";
-var matchLink = "http://api.steampowered.com/IDOTA2Match_570/GetMatchDetails/V001/?match_id=";
-var Matchurl = "https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/V001/?key=BC047CF7E5D0CF76E35D7F63E6E07392";
+var MatchDetailurl = "http://api.steampowered.com/IDOTA2Match_570/GetMatchDetails/V001/?match_id=";
+var MatchHistoryurl = "http://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/V001/?account_id="
+var inDb;
 
 var self = module.exports = {
     downloadMatchData: function (matchId) {
-        var url = matchLink + matchId + key;
-        //var url = url;
+        var url = MatchDetailurl + matchId + key;
 
         http.get(url, function (res) {
             var body = '';
@@ -20,13 +20,36 @@ var self = module.exports = {
                 body += chunk;
             });
 
-            res.on('end', function () {        
-                var matchData = JSON.parse(body);
+            res.on('end', function () {      
+                var matchData = JSON.parse(body); 
                 console.log("dota link worked!");
                 var matchArray = matchData['result'];
                 var newMatchData = changeData(matchArray);
-                console.log(newMatchData);
+                downloadUsers(newMatchData['players']);
                 updateDb(newMatchData);
+            });
+        }).on('error', function (e) {
+            console.log("dota link did not work : ", e);
+        });
+    },
+    downloadLatestMatches: function(userId) {
+        var url = MatchHistoryurl + userId + key + '&matches_requested=20';
+
+        http.get(url, function (res) {
+            var body = '';
+            res.on('data', function (chunk) {
+                body += chunk;
+            });
+            res.on('end', function () {        
+                var matchHistory = JSON.parse(body);
+                console.log("dota link worked!");
+                console.log("status : " + matchHistory['result']['status']);
+                if (matchHistory['result']['status'] == 1) {
+                    var matchArray = matchHistory['result']['matches'];
+                    for(var match of matchArray) {
+                        self.downloadMatchData(match['match_id'])
+                    }
+                } 
             });
         }).on('error', function (e) {
             console.log("dota link did not work : ", e);
@@ -37,6 +60,7 @@ var self = module.exports = {
 var changeData = function(matchData) {
         matchData['duration'] = formatDuration(matchData['duration']);
         matchData['game_mode'] = setGameModeNames(matchData['game_mode'])
+        // lobby type has been set as a number for some reason
         matchData['lobby_type'] = setLobbyNames(matchData['lobby_type'])
         return matchData;
 }
@@ -120,34 +144,42 @@ var setGameModeNames = function(gameModeId) {
     return gameMode;
 } 
 
+var checkDb = function(matchId) {
+    client.search({
+        index: 'match',
+        type: 'game',
+        body: {
+            query: {
+                match: {
+                    "match_id" : parseInt(matchId)
+                }
+            }
+        }
+    },function(error, response, status) {
+        if (response.hits.total == 0) {
+            inDb = false
+        } else {
+            inDb = true
+        } 
+    })
+    return inDb;
+}
+
 var updateDb = function(matchData) {
     var url = "localhost:9200/match/external?pretty";
 
     client.index({  
         index: 'match',
         type: 'game',
+        id : matchData['match_id'].toString(),
         body: matchData
     },function(err,resp,status) {
-        console.log(resp);
+        console.log(resp, err);
     });
+}
 
-
-    //var MongoClient = mongodb.MongoClient;
-    //var url = 'mongodb://localhost:27017/dota';
-
-    // MongoClient.connect(url, function(err, db) {
-    //     if (err) {
-    //         console.log('Unable to connect to the Server', err);
-    //     } else {
-    //         console.log('Connection established to', url);
-
-    //         var collection = db.collection('match');
-
-    //         db.collection('match').insertOne(body, function(err, result) {
-    //             //assert.equal(err, null);
-    //             console.log("Inserted Match into db");
-    //             //callback();
-    //         });
-    //     }
-    // });
+var downloadUsers = function(users) {
+    for (let user of users) {
+        steamUsers.downloadSteamProfileData('765' + (user['account_id'] + 61197960265728));
+    }
 }

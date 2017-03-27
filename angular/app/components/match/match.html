@@ -15,10 +15,10 @@
     <ul class="match_results">
         <li class="titles">
             <span class="img"></span>
-            <span class="lvl">lvl</span>
             <span class="kda">KDA</span>
-            <span class="gold">GPM</span>
-            <span class="lh">LH/DN</span>
+            <span class="net">NET</span>
+            <span class="lh">LH / DN</span>
+            <span class="gold">GPM / XPM</span>
             <span class="hd">DMG</span>
             <span class="heal">Heal</span>
             <span class="bd">BLD</span>
@@ -26,11 +26,11 @@
         </li>
         <li *ngFor="let radiantPlayer of radiantPlayers">
             <!--<span>Player : {{radiantPlayer.account_id}}</span>-->
-            <span class="img"><img src="/images/heroes/{{radiantPlayer.hero_id}}.jpg" /></span>
-            <span class="lvl">{{radiantPlayer.level}}</span>
-            <span class="kda">{{radiantPlayer.kills}}/{{radiantPlayer.deaths}}/{{radiantPlayer.assists}}</span>
-            <span class="gold">{{radiantPlayer.gold_per_min}}</span>
-            <span class="lh">{{radiantPlayer.last_hits}}/{{radiantPlayer.denies}}</span>
+            <span class="img"><img src="/images/heroes/{{radiantPlayer.hero_id}}.jpg" /><span class="lvl">{{radiantPlayer.level}}</span><img *ngIf="radiantPlayer.avatarmedium!=null" src="{{radiantPlayer.avatarmedium}}"/></span>
+            <span class="kda">{{radiantPlayer.kills}} / {{radiantPlayer.deaths}} / {{radiantPlayer.assists}}</span>
+            <span class="net">{{radiantPlayer.net_worth}}</span>
+            <span class="lh">{{radiantPlayer.last_hits}} / {{radiantPlayer.denies}}</span>
+            <span class="gold">{{radiantPlayer.gold_per_min}} / {{radiantPlayer.xp_per_min}}</span>
             <span class="hd">{{radiantPlayer.hero_damage}}</span>
             <span class="heal">{{radiantPlayer.hero_healing}}</span>
             <span class="bd">{{radiantPlayer.tower_damage}}</span>
@@ -40,6 +40,13 @@
             <span class="item_img_4"><img src="/images/items/{{radiantPlayer.item_3}}.jpg" /></span>
             <span class="item_img_5"><img src="/images/items/{{radiantPlayer.item_4}}.jpg" /></span>
             <span class="item_img_6"><img src="/images/items/{{radiantPlayer.item_5}}.jpg" /></span>
+            <span *ngIf="radiantPlayer.username!=null" class="profile"><a target="_blank" href="{{radiantPlayer.profileurl}}">{{radiantPlayer.username}}</a></span>
+            <span *ngIf="radiantPlayer.username==null" class="profile">Anonymous</span>
+            <span class="backpack">Backpack : 
+              <span class="item_img_7"><img src="/images/items/{{radiantPlayer.backpack_0}}.jpg" /></span>
+              <span class="item_img_8"><img src="/images/items/{{radiantPlayer.backpack_1}}.jpg" /></span>
+              <span class="item_img_9"><img src="/images/items/{{radiantPlayer.backpack_2}}.jpg" /></span>
+            </span>
         </li>
     </ul>
 </div>
@@ -48,10 +55,10 @@
     <ul class="match_results">
         <li class="titles">
             <span class="img"></span>
-            <span class="lvl">lvl</span>
             <span class="kda">KDA</span>
-            <span class="gold">GPM</span>
+            <span class="net">NET</span>
             <span class="lh">LH/DN</span>
+            <span class="gold">GPM/XPM</span>
             <span class="hd">DMG</span>
             <span class="heal">Heal</span>
             <span class="bd">BLD</span>
@@ -59,11 +66,11 @@
         </li>
         <li *ngFor="let direPlayer of direPlayers">
             <!--<span>Player : {{direPlayer.account_id}}</span>-->
-            <span class="img"><img src="/images/heroes/{{direPlayer.hero_id}}.jpg" /></span>
-            <span class="lvl">{{direPlayer.level}}</span>
-            <span class="kda">{{direPlayer.kills}}/{{direPlayer.deaths}}/{{direPlayer.assists}}</span>
-            <span class="gold">{{direPlayer.gold_per_min}}</span>
-            <span class="lh">{{direPlayer.last_hits}}/{{direPlayer.denies}}</span> 
+            <span class="img"><img src="/images/heroes/{{direPlayer.hero_id}}.jpg" /><span class="lvl">{{direPlayer.level}}</span><img *ngIf="direPlayer.avatarmedium!=null" src="{{direPlayer.avatarmedium}}"/></span>
+            <span class="kda">{{direPlayer.kills}} / {{direPlayer.deaths}} / {{direPlayer.assists}}</span>
+            <span class="net">{{direPlayer.net_worth}}</span>
+            <span class="lh">{{direPlayer.last_hits}} / {{direPlayer.denies}}</span> 
+            <span class="gold">{{direPlayer.gold_per_min}} / {{direPlayer.xp_per_min}}</span>
             <span class="hd">{{direPlayer.hero_damage}}</span>
             <span class="heal">{{direPlayer.hero_healing}}</span>
             <span class="bd">{{direPlayer.tower_damage}}</span>
@@ -73,6 +80,13 @@
             <span class="item_img_4"><img src="/images/items/{{direPlayer.item_3}}.jpg" /></span>
             <span class="item_img_5"><img src="/images/items/{{direPlayer.item_4}}.jpg" /></span>
             <span class="item_img_6"><img src="/images/items/{{direPlayer.item_5}}.jpg" /></span>
+            <span *ngIf="direPlayer.username!=null" class="profile"><a target="_blank" href="{{direPlayer.profileurl}}">{{direPlayer.username}}</a></span>
+            <span *ngIf="direPlayer.username==null" class="profile">Anonymous</span>
+            <span class="backpack">Backpack : 
+              <span class="item_img_7"><img src="/images/items/{{direPlayer.backpack_0}}.jpg" /></span>
+              <span class="item_img_8"><img src="/images/items/{{direPlayer.backpack_1}}.jpg" /></span>
+              <span class="item_img_9"><img src="/images/items/{{direPlayer.backpack_2}}.jpg" /></span>
+            </span>
         </li>
     </ul>
 </div>

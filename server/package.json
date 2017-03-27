@@ -22,14 +22,15 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "body-parser": "~1.0.1",
+    "big-number": "^0.4.0",
+    "body-parser": "^1.0.2",
     "connect-redis": "^3.2.0",
     "cookie": "^0.3.1",
     "cookie-session": "^2.0.0-alpha.3",
+    "elastic-deletebyquery": "^1.0.8",
     "elasticsearch": "^12.1.3",
     "express": "^4.0.0",
-    "mongodb": "^2.2.22",
-    "mongoose": "~3.6.13",
+    "express-session": "^1.15.1",
     "openid": "^2.0.6",
     "steam-login": "^0.1.4"
   }
