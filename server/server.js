@@ -4,10 +4,11 @@
 // call the packages we need
 var express    = require('express');        // call express
 var app        = express();                 // define our app using express
+var cors       = require('cors');
 var bodyParser = require('body-parser');
 var steam      = require('steam-login');
 var cookie = require('cookie');
-var session    = require('./node_modules/steam-login/node_modules/express-session');
+var session    = require('express-session');
 var bignumber = require("big-number");
 
 var match = require('./app/models/match');
@@ -20,6 +21,8 @@ var itemDownload = require('./app/models/itemDownload');
 var pick = require('./app/models/pick');
 var pickUpdate = require('./app/models/pickUpdate');
 
+// this enables cross-origin resource sharing, so you dont need the chrome extension
+app.use(cors());
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST

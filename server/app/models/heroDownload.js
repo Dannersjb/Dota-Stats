@@ -23,6 +23,7 @@ var self = module.exports = {
                 console.log(newHeroData);
                  for (var i = 0; i < newHeroData.length; i++) {
                     updateDb(newHeroData[i]);
+                    console.log(newHeroData[i])
                  }
             });
         }).on('error', function (e) {

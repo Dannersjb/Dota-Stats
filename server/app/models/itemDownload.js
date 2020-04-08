@@ -39,16 +39,17 @@ var changeData = function(itemData) {
 var bulkIndex = function(index, type, data) {
   let bulkBody = [];
   data.forEach(item => {     
-    bulkBody.push({
-      index: {
-        _index: index,
-        _type: type,
-        _id : item['id'].toString()
-      },
-    });
-
+    bulkBody.push(
+      { index: { _index: index, _type: type, _id : item['id'].toString() } }
+    );
     bulkBody.push(item);
   })
 
-  client.bulk({body: bulkBody});
+  console.log(bulkBody)
+  client.bulk({ index: index, type: type, body: bulkBody },
+    function(err,resp){
+      if (err) {
+        console.log(err);
+      } 
+    });
 }
