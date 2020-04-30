@@ -37,7 +37,7 @@
     "elasticsearch": "^16.7.1",
     "express": "^4.0.0",
     "express-session": "^1.17.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "openid": "^2.0.6",
     "rxjs": "5.0.1",
     "steam-login": "^0.1.4",
